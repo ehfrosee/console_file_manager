@@ -12,19 +12,20 @@ persons = [['А. С. Пушкин', '06.06.1799', 'шестое июня 1799'],
            ['Михаил Боярский', '26.12.1949', 'двадцать шестое декабря 1949 года'],
            ]
 
-k_questions = 5
-persons_for_test = random.sample(persons, k_questions)
+def victory_game(k_questions = 5):
 
-correct_answer_count = 0
-for person in persons_for_test:
-    birth_age = input("Введите дату рождения в формате dd.mm.yyyy {}: ".format(person[0]))
-    if birth_age == person[1]:
-        correct_answer_count += 1
-    else:
-        print(person[2])
+    persons_for_test = random.sample(persons, k_questions)
 
-print("Количество правильных ответов: {}".format(correct_answer_count))
-print("Количество ошибок: {}".format(5-correct_answer_count))
-print("Процент правильных ответов : {}".format(100*correct_answer_count/k_questions))
-print("Процент неправильных ответов: {}".format(100*(5-correct_answer_count)/k_questions))
+    correct_answer_count = 0
+    for person in persons_for_test:
+        birth_age = input("Введите дату рождения в формате dd.mm.yyyy {}: ".format(person[0]))
+        if birth_age == person[1]:
+            correct_answer_count += 1
+        else:
+            print(person[2])
+
+    print("Количество правильных ответов: {}".format(correct_answer_count))
+    print("Количество ошибок: {}".format(5-correct_answer_count))
+    print("Процент правильных ответов : {}".format(100*correct_answer_count/k_questions))
+    print("Процент неправильных ответов: {}".format(100*(5-correct_answer_count)/k_questions))
 

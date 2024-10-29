@@ -58,21 +58,22 @@ def print_purchase_list():
     for purchise in purchase_list:
         print("Покупка: {}, сумма {}".format(purchise[0], purchise[1]))
 
-while True:
-    print('1. пополнение счета')
-    print('2. покупка')
-    print('3. история покупок')
-    print('4. выход')
+def bank_account():
+    while True:
+        print('1. пополнение счета')
+        print('2. покупка')
+        print('3. история покупок')
+        print('4. выход')
 
-    choice = input('Выберите пункт меню: ')
-    match choice:
-        case '1':
-            income()
-        case '2':
-            buy()
-        case '3':
-            print_purchase_list()
-        case '4':
-            break
-        case _:
-            print('Неверный пункт меню')
+        choice = input('Выберите пункт меню: ')
+        match choice:
+            case '1':
+                income()
+            case '2':
+                buy()
+            case '3':
+                print_purchase_list()
+            case '4':
+                break
+            case _:
+                print('Неверный пункт меню')

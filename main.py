@@ -45,7 +45,7 @@ while True:
         case '8':
             sys_info()
         case '9':
-            pass
+            program_author()
         case '10':
             victory_game()
         case '11':

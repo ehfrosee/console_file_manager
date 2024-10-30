@@ -1,19 +1,20 @@
 from victory import victory_game
 from bank_account import bank_account
-from os_functions import list_dir, mk_dir, rm_dir, file_copy, sys_info, program_author
+from os_functions import list_dir, mk_dir, rm_dir, file_copy, sys_info, program_author, rm_file, list_dir_only, list_file_only
 menu = [
     '1 - создать папку',
-    '2 - удалить(файл / папку)',
-    '3 - копировать(файл / папку)',
-    '4 - просмотр содержимого рабочей директории',
-    '5 - посмотреть только папки',
-    '6 - посмотреть только файлы',
-    '7 - просмотр информации об операционной системе',
-    '8 - создатель программы',
-    '9 - играть в викторину',
-    '10 - мой банковский счет',
-    '11 - смена рабочей директории(*необязательный пункт)',
-    '12 - выход'
+    '2 - удалить папку',
+    '3 - удалить файл',
+    '4 - копировать(файл / папку)',
+    '5 - просмотр содержимого рабочей директории',
+    '6 - посмотреть только папки',
+    '7 - посмотреть только файлы',
+    '8 - просмотр информации об операционной системе',
+    '9 - создатель программы',
+    '10 - играть в викторину',
+    '11 - мой банковский счет',
+    '12 - смена рабочей директории(*необязательный пункт)',
+    '13 - выход'
     ]
 
 while True:
@@ -26,29 +27,32 @@ while True:
             dir_name = input("Введите имя создаваемой папки или файла: ")
             mk_dir(dir_name)
         case '2':
-            dir_name = input("Введите имя удаляемой папки или файла: ")
+            dir_name = input("Введите имя удаляемой папки: ")
             rm_dir(dir_name)
         case '3':
+            file_name = input("Введите имя удаляемого файла: ")
+            rm_file(file_name)
+        case '4':
             filename = input("Введите имя копируемой папки или файла: ")
             newname = input("Введите новое имя: ")
             file_copy(filename, newname)
-        case '4':
-            list_dir()
         case '5':
-            pass
+            list_dir()
         case '6':
-            pass
+            list_dir_only()
         case '7':
-            sys_info()
+            list_file_only()
         case '8':
-            pass
+            sys_info()
         case '9':
-            victory_game()
+            pass
         case '10':
-            bank_account()
+            victory_game()
         case '11':
-            program_author()
+            bank_account()
         case '12':
+            program_author()
+        case '13':
             break
         case _:
             print('Неверный пункт меню')

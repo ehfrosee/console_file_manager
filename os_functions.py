@@ -6,8 +6,20 @@ import shutil
 # os - основные функции
 
 # список файлов и папок
-def list_dir():
-    print(os.listdir())
+def list_dir(directory='.'):
+    #Вывод папок
+    dir_list = os.listdir(directory)
+    print(dir_list)
+
+def list_dir_only(directory='.'):
+    #Вывод папок
+    dir_list = [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
+    print(dir_list)
+
+def list_file_only(directory='.'):
+    #Вывод файлов
+    file_list = [name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name))]
+    print(file_list)
 
 def mk_dir(dirname):
     # проверка на существование
@@ -20,11 +32,25 @@ def mk_dir(dirname):
 
 def rm_dir(dirname):
     # удалить папку
-    if os.path.exists(dirname):
+    try:
         os.rmdir(dirname)
         print(f'Папка {dirname} удалена')
-    else:
-        print(f'Папкаи с именем {dirname} не существует')
+    except FileNotFoundError:
+        print(f'Папка с именем {dirname} не существует')
+    except OSError:
+        print(f'Папка с именем {dirname} не пустая')
+
+def rm_file(filename):
+    # Удалить файл
+    try:
+        os.remove(filename)
+        print(f'Файл {filename} удален')
+    except FileNotFoundError:
+        print(f'Файл с именем {filename} не существует')
+    except OSError:
+        print(f'для удаления {filename} выберите пункт "Удалить папку"')
+
+
 
 # shutil
 def file_copy(filename, newname):

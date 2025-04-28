@@ -1,0 +1,2 @@
+files: account.json, bank_account.py, bank_account_123.py, listdir.txt, main.py, os_functions.py, README.md, test_filemanager.py, test_python.py, victory.py
+dirs: .git, .idea, __pycache__, туц_ащдвук1

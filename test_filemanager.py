@@ -28,6 +28,16 @@ def file_test():
     list_file_only()
     print('file test OK')
 
+def save_content():
+    directory = '.'
+    file_list = [name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name))]
+
+    dir_list = [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
+    with open('listdir.txt', 'w') as f:
+        f.write('files: ' + ", ".join(file_list))
+        f.write('\ndirs: ' + ", ".join(dir_list))
+
 if __name__ == "__main__":
     test_dir()
     file_test()
+    save_content()

@@ -33,8 +33,9 @@
 
 Для реализации основного меню можно использовать пример ниже или написать свой
 """
-account = 0
-purchase_list = []
+import json
+
+
 def income():
     """
     Функция пополнения счёта
@@ -42,6 +43,7 @@ def income():
     global account
     sum = int(input("Введите сумму пополнения: "))
     account += sum
+
 
 def buy():
     global account, purchase_list
@@ -54,11 +56,34 @@ def buy():
         account -= sum
         purchase_list.append([purchise, sum])
         return
+
+
 def print_purchase_list():
     for purchise in purchase_list:
         print("Покупка: {}, сумма {}".format(purchise[0], purchise[1]))
 
+
+def load_account():
+    global account, purchase_list
+    try:
+        with open('account.json', 'r') as f:
+            account_json = json.load(f)
+            account = account_json['account']
+            purchase_list = account_json['purchase_list']
+    except FileNotFoundError:
+        account = 0
+        purchase_list = []
+
+
+def save_account():
+    # Сохранение в файл
+    account_json = {'account': account, 'purchase_list': purchase_list}
+    with open('account.json', 'w') as f:
+        json.dump(account_json, f)
+
+
 def bank_account():
+    load_account()
     while True:
         print('1. пополнение счета')
         print('2. покупка')
@@ -74,6 +99,7 @@ def bank_account():
             case '3':
                 print_purchase_list()
             case '4':
+                save_account()
                 break
             case _:
                 print('Неверный пункт меню')

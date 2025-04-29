@@ -3,33 +3,64 @@ import os
 import sys
 import shutil
 
+
 # os - основные функции
+# Добавление названия функции
+def add_separators(f):
+    # inner - итоговая функция с новым поведение
+    def inner(*args, **kwargs):
+        # поведение до вызова
+        print(f'**{f.__name__}**')
+        result = f(*args, **kwargs)
+        # поведение после вызова
+        print('*' * 10)
+        return result
+
+    # возвращается функция inner с новым поведением
+    return inner
 
 # список файлов и папок
+@add_separators
 def list_dir(directory='.'):
-    #Вывод папок
+    # Вывод папок
     dir_list = os.listdir(directory)
     print(dir_list)
 
+
+@add_separators
 def list_dir_only(directory='.'):
-    #Вывод папок
-    dir_list = [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
-    print(dir_list)
+    # Вывод папок
+    # dir_list = [name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name))]
+    # dir_list = (name for name in os.listdir(directory) if os.path.isdir(os.path.join(directory, name)))
+    dir_list = filter(lambda name: os.path.isdir(os.path.join(directory, name)), os.listdir(directory))
+    print(list(dir_list))
 
+
+@add_separators
 def list_file_only(directory='.'):
-    #Вывод файлов
-    file_list = [name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name))]
-    print(file_list)
+    # Вывод файлов
+    # file_list = [name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name))]
+    # file_list = (name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name)))
+    file_list = filter(lambda name: os.path.isfile(os.path.join(directory, name)), os.listdir(directory))
+    print(list(file_list))
 
+
+@add_separators
 def mk_dir(dirname):
     # проверка на существование
-    if not os.path.exists(dirname):
+    #    if not os.path.exists(dirname):
+    try:
         # сздать папку передаем путь
         os.mkdir(dirname)
         print(f'Папка {dirname} создана')
-    else:
+    except FileExistsError:
+        #    else:
         print(f'Папка с именем {dirname} существует')
+    except OSError as e:
+        print(f"Ошибка при создании директории: {e}")
 
+
+@add_separators
 def rm_dir(dirname):
     # удалить папку
     try:
@@ -40,6 +71,8 @@ def rm_dir(dirname):
     except OSError:
         print(f'Папка с именем {dirname} не пустая')
 
+
+@add_separators
 def rm_file(filename):
     # Удалить файл
     try:
@@ -51,18 +84,21 @@ def rm_file(filename):
         print(f'для удаления {filename} выберите пункт "Удалить папку"')
 
 
-
 # shutil
+@add_separators
 def file_copy(filename, newname):
     shutil.copy(filename, newname)
 
+
 # sys
+@add_separators
 def sys_info():
     print(sys.platform)
 
+
+@add_separators
 def program_author():
     print('Автор программы: Эфрос Евгений Евгеньевич')
-
 
 # # путь до текущей папки
 # print(os.getcwd())

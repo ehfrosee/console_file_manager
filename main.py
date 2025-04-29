@@ -1,6 +1,7 @@
 from victory import victory_game
 from bank_account import bank_account
 from os_functions import list_dir, mk_dir, rm_dir, file_copy, sys_info, program_author, rm_file, list_dir_only, list_file_only
+
 menu = [
     '1 - создать папку',
     '2 - удалить папку',
